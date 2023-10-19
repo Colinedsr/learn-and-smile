@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('dreamers', function (Blueprint $table) {
             $table->id();
             $table->integer('group_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->string('name');
             $table->string('birthdate');
             $table->integer('avatar');

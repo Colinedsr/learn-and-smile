@@ -18,9 +18,12 @@ final class DreamerController extends Controller
 
     public function update(Request $request)
     {
-        $dreamer = Dreamer::findOrfail($request->input('id'));
-        $dreamer->update(['group_id' => $request->input('groupId')]);
-
-        return $dreamer;
+        $dreamer = Dreamer::whereNotNull('user_id')->find($request->input('id'));
+        if ($dreamer !== null) {
+            $dreamer->update(['group_id' => $request->input('groupId')]);
+            return $dreamer;
+        } else {
+            return 'dreamer already has a user';
+        }
     }
 }

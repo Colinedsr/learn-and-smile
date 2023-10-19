@@ -17,6 +17,7 @@ class Dreamer extends Model
         'birthdate',
         'avatar',
         'group_id',
+        'user_id'
     ];
 
 }
