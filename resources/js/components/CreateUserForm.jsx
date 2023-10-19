@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
-export default function UserForm() {
+
+export default function CreateUserForm() {
     const [errorMessage, setErrorMessage] = useState('')
     const saveNewUser = (newUser) => {
         fetch(' api/user ', {
@@ -23,16 +25,17 @@ export default function UserForm() {
     }
 
     return (
-        <Form style={{ width: '18rem' }}>
-            <Form.Label>Créer un nouvel utilisateur</Form.Label>
-            <Form.Control style={{ border: 'solid black' }}>
-                <form onSubmit={onSubmit}>
-                    <input type="text" id="email" name="email" />
-                    <input type="text" id="password" name="password" />
-                    <button type="submit"> Sauvegarder </button>
-                </form >
-                <p>{errorMessage}</p>
-            </Form.Control>
-        </Form>
+        <Form style={{ width: '18rem' }} onSubmit={onSubmit}>
+            <Form.Group>
+                <Form.Label>EMAIL</Form.Label>
+                <Form.Control style={{ border: 'solid black' }} type="email" placeholder="name@example.com" />
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>password</Form.Label>
+                <Form.Control style={{ border: 'solid black' }} type="password" placeholder="*****" />
+            </Form.Group>
+            <Button type="submit" > Sauvegarder </Button>
+            <p>{errorMessage}</p>
+        </Form >
     )
 }

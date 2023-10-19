@@ -1,11 +1,13 @@
-import GroupList from "./GroupList";
-import UserForm from "./UserForm";
+import GroupListByUser from "./GroupListByUser";
+import CreateUserForm from "./CreateUserForm";
+import UpdateDreamerForm from "./UpdateDreamerForm";
 
 export default function App() {
     return (
         <div style={{ padding: '100px' }}>
-            <UserForm />
-            <GroupList />
+            <CreateUserForm />
+            <GroupListByUser />
+            <UpdateDreamerForm />
         </div>
     )
 }

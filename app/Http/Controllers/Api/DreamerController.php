@@ -4,14 +4,23 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dreamer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 final class DreamerController extends Controller
 {
-    public function update(int $id, int $groupId): bool
+    public function show()
     {
-        $dreamer = Dreamer::findOrfail($id);
-        $dreamer->update(['group_id' => $groupId]);
+        $dreamer = DB::table('dreamers')->get();
 
-        return true;
+        return $dreamer;
+    }
+
+    public function update(Request $request)
+    {
+        $dreamer = Dreamer::findOrfail($request->input('id'));
+        $dreamer->update(['group_id' => $request->input('groupId')]);
+
+        return $dreamer;
     }
 }

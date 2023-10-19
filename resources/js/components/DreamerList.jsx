@@ -1,26 +1,29 @@
 import { useEffect, useState } from "react"
+import GroupMembers from "./GroupMembers";
 
-export default function DreamerList({ dreamers }) {
+export default function DreamerList({ groups }) {
     const [errorMessage, setErrorMessage] = useState('')
-    const list = dreamers.map(dreamer => {
-        return (
-            <>
-                <p>{dreamer.name}</p>
-                <p>{dreamer.birthdate}</p>
-                <p>{dreamer.avatar}</p>
-            </>
-        )
-    })
+    const list = groups.map(group => {
+        for (const key in group) {
+            const value = group[key];
+            return (
+                <>
+                    <h3>{key}</h3>
+                    <GroupMembers members={group[key]} />
+                </>
+            )
+        }
 
+    })
     useEffect(() => {
         if (list.length === 0) {
             setErrorMessage('no dreamer')
         } else setErrorMessage('')
-    }, [dreamers])
+    }, [groups])
 
     return (
         <>
-            {list.length > 0 && list}
+            {list}
             <p>{errorMessage}</p>
         </>
     )

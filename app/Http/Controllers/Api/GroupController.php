@@ -13,12 +13,13 @@ final class GroupController extends Controller
 
     public function getUsersGroup(Request $request): array
     {
-        //recevoir userId depuis le front à travers une requete
         $groups = Group::where('user_id', $request->input('userId'))->get();
+        $results = [];
         if ($groups !== []) {
             foreach ($groups as $group) {
-                return $group->getDreamersByGroupId($group->id);
+                $results[] = [$group->name => $group->getDreamersByGroupId($group->id)];
             }
+            return $results;
         } 
         return [];
     }

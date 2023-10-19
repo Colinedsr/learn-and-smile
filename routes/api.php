@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::put('/dreamer/{id}', [DreamerController::class, 'update']);
+Route::get('/dreamer', [DreamerController::class, 'show']);
+Route::put('/dreamer', [DreamerController::class, 'update']);
 Route::post('/user',  [UserController::class, 'store']);
 Route::post('/group',  [GroupController::class, 'getUsersGroup']);
