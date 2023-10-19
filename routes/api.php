@@ -23,4 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::put('/dreamer/{id}', [DreamerController::class, 'update']);
 Route::post('/user',  [UserController::class, 'store']);
-Route::get('/group',  [GroupController::class, 'getUsersGroup']);
+Route::post('/group',  [GroupController::class, 'getUsersGroup']);

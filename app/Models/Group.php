@@ -18,4 +18,10 @@ class Group extends Model
         'user_id',
     ];
 
+    public function getDreamersByGroupId(int $groupId): array
+    {
+        $dreamers = Dreamer::where('group_id', $groupId)->get()->toArray();
+        return $dreamers;
+    }
+
 }
