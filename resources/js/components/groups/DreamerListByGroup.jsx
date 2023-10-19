@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import GroupMembers from "./GroupMembers";
 
-export default function DreamerList({ groups }) {
+export default function DreamerListByGroup({ groups }) {
     const [errorMessage, setErrorMessage] = useState('')
     const list = groups.map(group => {
         for (const key in group) {
@@ -23,6 +23,7 @@ export default function DreamerList({ groups }) {
 
     return (
         <>
+            <p>Members of the group</p>
             {list}
             <p>{errorMessage}</p>
         </>

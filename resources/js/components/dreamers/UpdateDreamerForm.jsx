@@ -33,7 +33,7 @@ export default function UpdateDreamerForm() {
 
     const dreamersList = dreamers.map((dreamer) => {
         return (
-            <Form style={{ width: '18rem' }} onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit}>
                 <Form.Group>
                     <Form.Label>{dreamer.name}</Form.Label>
                     <Form.Control readOnly style={{ border: 'solid black' }} type="id" defaultValue={dreamer.id} />
@@ -50,6 +50,7 @@ export default function UpdateDreamerForm() {
 
     return (
         <>
+            <h1>Update Dreamer Group</h1>
             {dreamersList}
         </>
     )

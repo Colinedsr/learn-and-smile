@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dreamer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,19 +12,39 @@ final class DreamerController extends Controller
 {
     public function show()
     {
-        $dreamer = DB::table('dreamers')->get();
+        $dreamers = DB::table('dreamers')->get();
 
-        return $dreamer;
+        return $dreamers;
+    }
+
+    public function store(Request $request): JsonResponse
+    {
+        try {
+            $dreamer = Dreamer::create([
+                'name' => $request->input('name'),
+                'birthdate' => $request->input('birthdate'),
+                'user_id' => $request->input('user_id'),
+                'avatar' => rand(2,50),
+            ]);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+
+        return response()->json([
+            'message' => 'utilisateur créé',
+            'dreamer' => $dreamer
+        ]);
     }
 
     public function update(Request $request)
     {
-        $dreamer = Dreamer::whereNotNull('user_id')->find($request->input('id'));
+        $dreamer = Dreamer::whereNull('user_id')->find($request->input('id'));
         if ($dreamer !== null) {
-            $dreamer->update(['group_id' => $request->input('groupId')]);
+            $dreamer->group_id = $request->input('groupId');
+            $dreamer->save();
             return $dreamer;
         } else {
-            return 'dreamer already has a user';
+            return ['error' => 'dreamer already has a user'];
         }
     }
 }

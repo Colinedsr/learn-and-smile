@@ -1,12 +1,12 @@
 import { useState } from "react";
-import DreamerList from "./DreamerList";
+import DreamerListByGroup from "./DreamerListByGroup";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 
 export default function GroupListByUser() {
     const [groups, setGroups] = useState([])
-    const selectUser = (userId) => {
+    const fetchUserGroups = (userId) => {
         fetch("api/group", {
             method: "POST",
             body: JSON.stringify({
@@ -19,20 +19,21 @@ export default function GroupListByUser() {
     };
     const onSubmit = (event) => {
         event.preventDefault();
-        selectUser(event.target[0].value);
+        fetchUserGroups(event.target[0].value);
     };
 
     return (
-        <>
-            <Form style={{ width: '18rem' }} onSubmit={onSubmit}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <h1>Fetch User's groups</h1>
+            <Form onSubmit={onSubmit}>
                 <Form.Group>
                     <Form.Label>USER ID</Form.Label>
                     <Form.Control style={{ border: 'solid black' }} type="text" />
                 </Form.Group>
                 <Button type="submit" > Sauvegarder </Button>
             </Form >
-            <DreamerList groups={groups} />
-        </>
+            <DreamerListByGroup groups={groups} />
+        </div>
     );
 }
 

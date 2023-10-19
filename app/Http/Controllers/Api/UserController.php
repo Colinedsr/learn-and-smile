@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dreamer;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 final class UserController extends Controller
 {
     public function store(Request $request): JsonResponse
     {
         try {
-            User::create([
+            $user = User::create([
                 'email' => $request->input('email'),
                 'password' => $request->input('password'),
             ]);
@@ -22,7 +25,8 @@ final class UserController extends Controller
         }
 
         return response()->json([
-            'message' => 'utilisateur créé'
+            'message' => 'utilisateur créé',
+            'user' => $user
         ]);
     }
 }
