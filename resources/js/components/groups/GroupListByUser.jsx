@@ -23,7 +23,7 @@ export default function GroupListByUser() {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', border: 'solid', padding: '40px' }}>
             <h1>Fetch User's groups</h1>
             <Form onSubmit={onSubmit}>
                 <Form.Group>

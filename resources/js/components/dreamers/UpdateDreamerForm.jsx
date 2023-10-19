@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-
 export default function UpdateDreamerForm() {
     const [dreamers, setDreamers] = useState([])
     const initialize = () => {
@@ -34,7 +33,7 @@ export default function UpdateDreamerForm() {
     const dreamersList = dreamers.map((dreamer) => {
         return (
             <Form onSubmit={onSubmit}>
-                <Form.Group>
+                <Form.Group style={{ padding: '20px', display: 'flex', flexDirection: 'column' }}>
                     <Form.Label>{dreamer.name}</Form.Label>
                     <Form.Control readOnly style={{ border: 'solid black' }} type="id" defaultValue={dreamer.id} />
                     <Form.Control style={{ border: 'solid black' }} type="group_id" placeholder={dreamer.group_id} />
@@ -49,9 +48,9 @@ export default function UpdateDreamerForm() {
     }, [])
 
     return (
-        <>
+        <div style={{ display: 'flex', flexDirection: 'column', border: 'solid', padding: '40px' }}>
             <h1>Update Dreamer Group</h1>
             {dreamersList}
-        </>
+        </div>
     )
 };

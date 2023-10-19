@@ -52,7 +52,7 @@ export default function UserForm() {
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', border: 'solid', padding: '40px' }}>
             <Form onSubmit={onSubmit}>
                 <h1>Create a User</h1>
                 <Form.Group>
