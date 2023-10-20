@@ -77,7 +77,7 @@ export default function UserForm() {
                             <Form.Control type="text" placeholder="Dreamer's name" />
                         </Col>
                         <Col>
-                            <Form.Control type="text" placeholder='birthdate' />
+                            <Form.Control type="date" placeholder='birthdate' />
                         </Col>
                         <Col>
                             <Button type="submit"> save </Button>

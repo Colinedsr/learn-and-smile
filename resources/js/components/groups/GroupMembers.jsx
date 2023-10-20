@@ -6,8 +6,7 @@ export default function GroupMembers({ members }) {
         return (
             <ListGroup>
                 <ListGroup.Item
-                    className="d-flex justify-content-between align-items-start"
-                >
+                    className="d-flex justify-content-between align-items-start">
                     <div className="ms-2 me-auto">
                         <div className="fw-bold">{member.name}</div>
                         {member.birthdate}
@@ -17,7 +16,6 @@ export default function GroupMembers({ members }) {
                     </Badge>
                 </ListGroup.Item>
             </ListGroup >
-
         )
     })
 

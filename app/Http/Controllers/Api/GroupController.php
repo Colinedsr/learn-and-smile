@@ -21,10 +21,8 @@ final class GroupController extends Controller
             $results = [];
             if ($user !== null) {
                 $groups = $user->groups;
-                if ($groups !== []) {
-                    foreach ($groups as $group) {
-                        $results[] = [$group->name => $group->dreamers];
-                    }
+                foreach ($groups as $group) {
+                    $results[] = [$group->name => $group->dreamers];
                 } 
             }
             return response()->json([
