@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Dreamer extends Model
 {
@@ -20,4 +21,8 @@ class Dreamer extends Model
         'user_id'
     ];
 
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Group::class, 'group_id', 'id');
+    }
 }

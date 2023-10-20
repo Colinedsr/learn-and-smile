@@ -1,0 +1,12 @@
+
+/* Style the heading */
+h1 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+
+/* Hover effect for links */
+a:hover {
+    background-color: #0056b3;
+}

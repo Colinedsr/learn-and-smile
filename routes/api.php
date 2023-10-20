@@ -17,13 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+}); */
 
-Route::get('/dreamer', [DreamerController::class, 'show']);
+Route::get('/dreamer', [DreamerController::class, 'index']);
+Route::get('/dreamer/show', [DreamerController::class, 'show']);
 Route::put('/dreamer', [DreamerController::class, 'update']);
 Route::post('/dreamer',  [DreamerController::class, 'store']);
 
-Route::post('/user',  [UserController::class, 'store']);
-Route::post('/group',  [GroupController::class, 'getUsersGroup']);
+Route::get('/user',  [UserController::class, 'show']);
+Route::post('/user/store',  [UserController::class, 'store']);
+
+Route::get('/group', [GroupController::class, 'show']);
+Route::post('/group/fetch',  [GroupController::class, 'getUsersGroup']);

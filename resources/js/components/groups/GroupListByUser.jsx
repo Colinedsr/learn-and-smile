@@ -1,13 +1,15 @@
 import { useState } from "react";
 import DreamerListByGroup from "./DreamerListByGroup";
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
 
 export default function GroupListByUser() {
     const [groups, setGroups] = useState([])
     const fetchUserGroups = (userId) => {
-        fetch("api/group", {
+        fetch(window.location.href + "/fetch", {
             method: "POST",
             body: JSON.stringify({
                 userId: userId,
@@ -15,7 +17,7 @@ export default function GroupListByUser() {
             headers: { "Content-Type": "application/json" },
         })
             .then((response) => response.json())
-            .then((data) => setGroups(data));
+            .then((data) => setGroups(data.results));
     };
     const onSubmit = (event) => {
         event.preventDefault();
@@ -23,14 +25,17 @@ export default function GroupListByUser() {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', border: 'solid', padding: '40px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', padding: '40px' }}>
             <h1>Fetch User's groups</h1>
             <Form onSubmit={onSubmit}>
-                <Form.Group>
-                    <Form.Label>USER ID</Form.Label>
-                    <Form.Control style={{ border: 'solid black' }} type="text" />
-                </Form.Group>
-                <Button type="submit" > Sauvegarder </Button>
+                <Row style={{ display: 'inline-flex' }}>
+                    <Col>
+                        <Form.Control style={{ border: 'solid black' }} type="text" placeholder="User ID" />
+                    </Col>
+                    <Col>
+                        <Button type="submit" > Show groups </Button>
+                    </Col>
+                </Row>
             </Form >
             <DreamerListByGroup groups={groups} />
         </div>

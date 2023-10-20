@@ -1,30 +1,32 @@
 import { useState } from 'react';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
 
 export default function UserForm() {
-    const [responseMessage, setResponseMessage] = useState('')
+    const [userResponseMessage, setUserResponseMessage] = useState('')
+    const [dreamerResponseMessage, setDreamerResponseMessage] = useState('')
     const [user, setUser] = useState({})
     const saveNewUser = (newUser) => {
-        fetch(' api/user ', {
+        fetch(window.location.href + '/store', {
             method: 'POST',
             body: JSON.stringify({ 'email': newUser[0].value, 'password': newUser[1].value }),
             headers: { 'Content-Type': 'application/json' },
         })
             .then((response) => response.json().then(data => {
                 if (data.error) {
-                    setResponseMessage(data.error)
+                    setUserResponseMessage(data.error)
                 } else {
                     setUser(data.user)
-                    setResponseMessage(data.message)
+                    setUserResponseMessage(data.message)
                 }
             }))
     };
 
     const saveNewDreamer = (newDreamer) => {
-        console.log(user)
-        fetch('api/dreamer', {
+        fetch('dreamer', {
             method: 'POST',
             body: JSON.stringify({
                 'name': newDreamer[0].value,
@@ -35,9 +37,9 @@ export default function UserForm() {
         })
             .then((response) => response.json().then(data => {
                 if (data.error) {
-                    setResponseMessage(data.error)
+                    setDreamerResponseMessage(data.error)
                 } else {
-                    setResponseMessage(data.message)
+                    setDreamerResponseMessage(data.message)
                 }
             }))
     };
@@ -52,33 +54,36 @@ export default function UserForm() {
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', border: 'solid', padding: '40px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '40px' }}>
             <Form onSubmit={onSubmit}>
                 <h1>Create a User</h1>
-                <Form.Group>
-                    <Form.Label>email</Form.Label>
-                    <Form.Control style={{ border: 'solid black' }} type="email" placeholder="name@example.com" />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>password</Form.Label>
-                    <Form.Control style={{ border: 'solid black' }} type="password" placeholder="*****" />
-                </Form.Group>
-                <Button type="submit"> save </Button>
+                <Row style={{ display: 'inline-flex' }}>
+                    <Col>
+                        <Form.Control style={{ width: 'auto' }} type="email" placeholder="email" />
+                    </Col>
+                    <Col>
+                        <Form.Control style={{ width: 'auto' }} type="password" placeholder="password" />
+                    </Col>
+                    <Col>
+                        <Button variant="primary" type="submit"> save </Button>
+                    </Col>
+                </Row>
             </Form>
-            <p>{responseMessage}</p>
+            <p>{userResponseMessage}</p>
             {user.id &&
-                <Form onSubmit={onSubmitNewDreamer}>
-                    <Form.Group>
-                        <Form.Label>Dreamer's name</Form.Label>
-                        <Form.Control style={{ border: 'solid black' }} type="text" />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Dreamer's birthdate</Form.Label>
-                        <Form.Control style={{ border: 'solid black' }} type="text" />
-                    </Form.Group>
-                    <Button type="submit"> save </Button>
-
-                </Form>
+                <><Form onSubmit={onSubmitNewDreamer}>
+                    <Row style={{ display: 'inline-flex' }}>
+                        <Col>
+                            <Form.Control type="text" placeholder="Dreamer's name" />
+                        </Col>
+                        <Col>
+                            <Form.Control type="text" placeholder='birthdate' />
+                        </Col>
+                        <Col>
+                            <Button type="submit"> save </Button>
+                        </Col>
+                    </Row>
+                </Form><p>{dreamerResponseMessage}</p></>
             }
         </div>
     )
